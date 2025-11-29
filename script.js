@@ -61,7 +61,14 @@ function successCallback(pos){
     accuracy = pos.coords.accuracy;
  
  marker.setLatLng([lat,lng]).bindPopup('<b>Benson location</b>').update();
- map.setView([lat,long],10);
+ map.setView([lat,lng],10);
+ L.Routing.control({
+    waypoints: [
+        L.latLng(lat, lng),
+        L.latLng(5.698255697188423, -0.059635927538140544)
+    ],
+    routeWhileDragging: true
+ }).addTo(map);
 }
 
 function errorCallback(err){
