@@ -1,6 +1,11 @@
 {
   "name": "eagle-eye",
   "version": "1.0.0",
+  "main": "script.js",
+  "description": "Show the route between two points on a map",
+  "author": "The Eagle",
+  "license": "MIT",
+  "keywords": [],
   "scripts": {
     "build": "npx @tailwindcss/cli -i ./css/input.css -o ./css/output.css --watch"
   },
