@@ -56,7 +56,7 @@ let markerIcon = L.Icon.extend(
 });
 
 let user_home = new markerIcon({iconUrl: 'icons/home1.png'});
-let user_current = new markerIcon({iconUrl: 'icons/marker_person1.png'});
+let user_current = new markerIcon({iconUrl: 'icons/marker_person2.png'});
 let user_destination = new markerIcon({iconUrl: 'icons/marked1.png', iconSize: [55, 55], iconAnchor: [27, 55], popupAnchor: [0, -45]});
 
 function successCallback(pos){
@@ -82,6 +82,15 @@ function successCallback(pos){
         },
         routeWhileDragging: true
     }).addTo(map);
+}
+
+function successCallback2(pos){
+    lat = pos.coords.latitude;
+    lng = pos.coords.longitude;
+    accuracy = pos.coords.accuracy;
+ 
+    L.marker([lat, lng], {icon: user_current}).addTo(map).bindPopup("Your Current Location");
+    map.setView([lat,lng],10);
 }
 
 function errorCallback(err){
@@ -114,6 +123,7 @@ options = {
 
 if (GEOLOCATION) {
     GEOLOCATION.getCurrentPosition(successCallback, errorCallback, options)
+    GEOLOCATION.watchPosition(successCallback2, errorCallback, options)
 } else {
     errMessage = 'Your browser does not support geolocation. Please download a browser with geolocation support.'
 }
