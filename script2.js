@@ -1,0 +1,93 @@
+import { GEOLOCATION, options, errorCallback } from "./utils.js";
+
+
+const map_container = document.querySelector('#map_wrapper');
+const submit_btn = document.querySelector('#submit_coords');
+const close_map_btn = document.querySelector('#close_map');
+const show_map_btn = document.querySelector('#dest_map');
+const destination = document.querySelector('#destination');
+
+const map = L.map('map').setView([0,0],2);
+
+let osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 20
+}).addTo(map);
+
+let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+}).addTo(map);
+
+let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+}).addTo(map);
+
+let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+}).addTo(map);
+
+let googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+    maxZoom: 20,
+    subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+}).addTo(map);
+
+
+const baseTiles = {
+    'Google Street': googleStreets,
+    'Google Hybrid': googleHybrid,
+    'Google Terrain': googleTerrain,
+    'Google Satellite': googleSat,
+    'OSM': osm,
+};
+
+let marker = L.marker([0,0]).addTo(map);
+L.control.layers(baseTiles).addTo(map);
+
+let user_destination = L.icon({
+    iconUrl: 'icons/marked1.png',
+    iconSize: [55, 55],
+    iconAnchor: [27, 55],
+    popupAnchor: [0, -45]
+});
+
+function successCallback(pos){
+    let lat = pos.coords.latitude;
+    let lng = pos.coords.longitude;
+    map.setView([lat,lng], 13);
+    marker.setLatLng([lat,lng]).bindPopup('Your Current Location, choose your destination on the map and tap the submit button').openPopup();
+
+    map.on('click', function(e){
+        let destLat = e.latlng.lat;
+        let destLng = e.latlng.lng;
+
+        L.marker([destLat, destLng], {icon: user_destination}).addTo(map)
+        . bindPopup(`Destination Location:<br> Latitude: ${destLat.toFixed(5)} <br> Longitude: ${destLng.toFixed(5)}`).openPopup();
+
+        destination.value = `${destLat}, ${destLng}`;
+        localStorage.setItem('destination', destination.value);
+        console.log(`Destination set to: ${destLat}, ${destLng}`);
+    });
+}
+
+if (GEOLOCATION){
+    GEOLOCATION.getCurrentPosition(successCallback, errorCallback, options);
+} else {
+    console.log('Geolocation is not supported by your browser');
+}
+
+
+function showMap(){
+  map_container.removeAttribute('inert');
+  map_container.classList.remove('opacity-0');
+}
+
+function closeMap(){
+  map_container.classList.add('opacity-0');
+  map_container.setAttribute('inert', 'true');
+}
+
+show_map_btn.addEventListener('click', showMap);
+close_map_btn.addEventListener('click', closeMap);

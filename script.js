@@ -1,13 +1,16 @@
 // Eagle Eye
+import { GEOLOCATION, options, errorCallback } from "./utils.js";
+
 let lat;
 let lng;
-let destinationLat = 5.750677437002746;
-let destinationLng = -0.08736817120526819;
 let accuracy;
-let GEOLOCATION = navigator.geolocation
 let errMessage = '';
+let destination = localStorage.getItem('destination').split(',');
+let [destinationLat, destinationLng] = destination;
+let currentMarker;
+localStorage.removeItem('destination');
 
-const map = L.map('map').setView([0,0],2);
+const map = L.map('map').setView([0,0],2, {touchZoom: true, doubleTapZoom: true});
 
 let osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -22,25 +25,25 @@ let googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={
 let googleHybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
+}).addTo(map);
 
 let googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
+}).addTo(map);
 
 let googleTerrain = L.tileLayer('http://{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
     maxZoom: 20,
     subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-});
+}).addTo(map);
 
 
-const baseTiles = {
-    'OSM': osm,
+const baseTiles = { 
     'Google Street': googleStreets,
     'Google Hybrid': googleHybrid,
     'Google Terrain': googleTerrain,
-    'Google Satellite': googleSat
+    'Google Satellite': googleSat,
+    'OSM': osm,
 }
 
 let marker = L.marker([0,0]).addTo(map)
@@ -84,40 +87,17 @@ function successCallback(pos){
     }).addTo(map);
 }
 
+
 function successCallback2(pos){
     lat = pos.coords.latitude;
     lng = pos.coords.longitude;
     accuracy = pos.coords.accuracy;
- 
-    L.marker([lat, lng], {icon: user_current}).addTo(map).bindPopup("Your Current Location");
-    map.setView([lat,lng],10);
-}
-
-function errorCallback(err){
-    switch (err.code) {
-        case err.UNKNOWN_ERROR:
-            errMessage = 'An unknown error occurred';
-            console.log(`${err.code} — ${err.message}`)
-            break;
-        case err.PERMISSION_DENIED:
-            errMessage = 'You denied Eagle Eye to retrieve your location';
-            console.log(`${err.code} — ${err.message}`)
-            break;
-        case err.POSITION_UNAVAILABLE:
-            errMessage = 'Unable to retrieve your location. Refresh the page and try again';
-            console.log(`${err.code} — ${err.message}`)
-            break;
-        case err.TIMEOUT:
-            errMessage = 'Location retrieval service timeout. Refresh and try again';
-            console.log(`${err.code} — ${err.message}`)
-            break;
+    if (currentMarker){
+        currentMarker.setLatLng([lat, lng]);
+    } else {
+        currentMarker = L.marker([lat, lng], {icon: user_current}).addTo(map).bindPopup("Your Current Location");
     }
-}
-
-options = {
-    enableHighAccuracy: true,
-    timeout: 3000,
-    maximumAge: 0,
+ 
 }
 
 
@@ -127,4 +107,6 @@ if (GEOLOCATION) {
 } else {
     errMessage = 'Your browser does not support geolocation. Please download a browser with geolocation support.'
 }
+
+console.log(`Destination Coordinates: ${destinationLat}, ${destinationLng}`);
 

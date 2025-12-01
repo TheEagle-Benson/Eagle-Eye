@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="css/output.css">
+  <link rel="stylesheet" href="leaflet/leaflet.css">
+  <script src="leaflet/leaflet.js"></script>
   <title>Home | Eagle Eye</title>
 </head>
 <body>
   <header class="flex place-items-center text-center gap-x-5 bg-cyan-500 p-4 w-full h-auto shadow-md border-b-gray-200 border-b-2">
     <img src="/icons/logo.png" alt="logo" class="size-12 rounded-full">
     <span class="text-[.85rem]  text-blue-800 font-bold">Eagle Eye</span>
-    <a href="home.html" class="text-white text-[1.15rem]">Home</a>
+    <a href="index.html" class="text-white text-[1.15rem]">Home</a>
     <a href="map.html" class="text-white text-[1.15rem]">Map</a>
     <a href="info.html" class="text-white text-[1.15rem]">Info</a>
   </header>
@@ -26,13 +28,15 @@
       <span class="absolute w-20 h-0.5 top-2/4 right-[20%] bg-blue-600 border border-blue-700"></span>
     </div>
     <button class="bg-blue-600 text-white p-2 rounded-md mx-2" id="dest_map">Choose destination on map</button>
-    <div inert class="absolute flex flex-col place-self-center w-full h-screen top-0 mx-4 bg-blue-300 opacity-0" id="map_wrapper">
+    <div inert class="absolute flex flex-col place-self-center w-full h-screen top-0 mx-4 bg-blue-300 opacity-0 transition ease-linear" id="map_wrapper">
       <section class="flex flex-row place-content-center w-full h-auto p-2 border-b border-b-blue-700">
         <button class="w-[6.539rem] bg-blue-700 text-white p-2 rounded-md mx-2 my-4" id="submit_coords">submit</button>
         <button class="w-[6.539rem] bg-red-600 text-white p-2 rounded-md mx-2 my-4" id="close_map" >Close Map</button>
       </section>
-      <div class="w-full h-screen" id="map_popup"></div>
+      <div class="w-full h-screen" id="map"></div>
     </div>
   </div>
+
+  <script type="module" src="script2.js"></script>
 </body>
 </html>
