@@ -6,6 +6,7 @@ const submit_btn = document.querySelector('#submit_coords');
 const close_map_btn = document.querySelector('#close_map');
 const show_map_btn = document.querySelector('#dest_map');
 const destination = document.querySelector('#destination');
+let destMarker;
 
 const map = L.map('map').setView([0,0],2);
 
@@ -58,19 +59,26 @@ function successCallback(pos){
     let lng = pos.coords.longitude;
     map.setView([lat,lng], 13);
     marker.setLatLng([lat,lng]).bindPopup('Your Current Location, choose your destination on the map and tap the submit button').openPopup();
+}
 
-    map.on('click', function(e){
+map.on('click', function(e){
         let destLat = e.latlng.lat;
         let destLng = e.latlng.lng;
 
-        L.marker([destLat, destLng], {icon: user_destination}).addTo(map)
-        . bindPopup(`Destination Location:<br> Latitude: ${destLat.toFixed(5)} <br> Longitude: ${destLng.toFixed(5)}`).openPopup();
+        if (destMarker){
+            map.removeLayer(destMarker);
+        }
+
+        destMarker = L.marker([destLat, destLng], {icon: user_destination}).addTo(map)
+        . bindPopup(`Destination Location:<br> Latitude: ${destLat.toFixed(5)} <br> Longitude: ${destLng.toFixed(5)}`).openPopup().on('click', (e) => {
+            map.removeLayer(e.target);
+            destMarker = null;
+        });
 
         destination.value = `${destLat}, ${destLng}`;
         localStorage.setItem('destination', destination.value);
         console.log(`Destination set to: ${destLat}, ${destLng}`);
     });
-}
 
 if (GEOLOCATION){
     GEOLOCATION.getCurrentPosition(successCallback, errorCallback, options);
