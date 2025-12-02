@@ -145,7 +145,8 @@ async function geocodeLocation(location){
 place_btn.addEventListener('click', async (e) => {
     e.preventDefault();
     let location = destination.value;
-    if (typeof location === 'string'){
+    try {
+         if (typeof location === 'string'){
         location = location.trim();
         let coords = location.split(',');
         if (coords.length === 2){
@@ -158,12 +159,20 @@ place_btn.addEventListener('click', async (e) => {
             }
         }
     }
-    let coords = await geocodeLocation(location);
+    } catch (error) {
+        console.log('Error parsing coordinates:', error);
+    }
+
+   try {
+     let coords = await geocodeLocation(location);
     if (coords){
         let latlng = `${coords.latitude}, ${coords.longitude}`;
         sessionStorage.setItem('destination', latlng);
         window.location.assign('map.html');
     }
+   } catch (error) {
+    console.log('Error in geocoding location:', error);
+   }
 });
 
 show_map_btn.addEventListener('click', showMap);
