@@ -1,8 +1,9 @@
 import { GEOLOCATION, options, errorCallback } from "./utils.js";
 
-
+const api_key = '94b2d37909e04685b36401282b3ddad9';
 const map_container = document.querySelector('#map_wrapper');
 const submit_btn = document.querySelector('#submit_coords');
+const place_btn = document.querySelector('#place-btn');
 const close_map_btn = document.querySelector('#close_map');
 const show_map_btn = document.querySelector('#dest_map');
 const destination = document.querySelector('#destination');
@@ -76,8 +77,8 @@ map.on('click', function(e){
         });
 
         destination.value = `${destLat}, ${destLng}`;
-        localStorage.setItem('destination', destination.value);
-        console.log(`Destination set to: ${destLat}, ${destLng}`);
+        sessionStorage.setItem('destination', destination.value);
+        console.log(`Destination set to: ${parseFloat(destLat)}, ${parseFloat(destLng)}`);
     });
 
 if (GEOLOCATION){
@@ -97,5 +98,77 @@ function closeMap(){
   map_container.setAttribute('inert', 'true');
 }
 
+async function fetch_fromOpenCage(location){
+    const urlOpenCage = `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${api_key}&limit=1`;
+    let response = await fetch(urlOpenCage);
+    let data = await response.json();
+    return data;
+}
+
+async function fetch_fromNominatim(location){
+    const urlNominatim = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&limit=1`;
+    let response = await fetch(urlNominatim);
+    let data = await response.json();
+    return data;
+}
+
+async function geocodeLocation(location){
+    let latitude, longitude;
+    try {
+        let data = await fetch_fromOpenCage(location);
+        if (data.status.code !== 200 || data.results.length === 0){
+            try {
+                data = await fetch_fromNominatim(location);
+                if (data.length === 0){
+                    console.log('Location not found');
+                    return;
+                } else {
+                    latitude = data[0].lat;
+                    longitude = data[0].lon;
+                    console.log(`Nominatim Geocode: ${location} => Latitude: ${latitude}, Longitude: ${longitude}`);
+                }
+            } catch (error) {
+                console.log('Error fetching from Nominatim:', error);
+            }
+        } else {
+            latitude = data.results[0].geometry.lat;
+            longitude = data.results[0].geometry.lng;
+            console.log(`OpenCage Geocode: ${location} => Latitude: ${latitude}, Longitude: ${longitude}`);
+        }
+    } catch (error) {
+        console.log('Error fetching from OpenCage:', error);
+    }
+
+    return { latitude, longitude}
+}
+
+place_btn.addEventListener('click', async (e) => {
+    e.preventDefault();
+    let location = destination.value;
+    if (typeof location === 'string'){
+        location = location.trim();
+        let coords = location.split(',');
+        if (coords.length === 2){
+            let lat = parseFloat(coords[0]);
+            let lng = parseFloat(coords[1]);
+            if (!isNaN(lat) && !isNaN(lng)){
+                sessionStorage.setItem('destination', `${lat}, ${lng}`);
+                window.location.assign('map.html');
+                return;
+            }
+        }
+    }
+    let coords = await geocodeLocation(location);
+    if (coords){
+        let latlng = `${coords.latitude}, ${coords.longitude}`;
+        sessionStorage.setItem('destination', latlng);
+        window.location.assign('map.html');
+    }
+});
+
 show_map_btn.addEventListener('click', showMap);
 close_map_btn.addEventListener('click', closeMap);
+submit_btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.assign('map.html');
+});

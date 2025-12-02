@@ -5,10 +5,9 @@ let lat;
 let lng;
 let accuracy;
 let errMessage = '';
-let destination = localStorage.getItem('destination').split(',');
+let destination = sessionStorage.getItem('destination').split(',');
 let [destinationLat, destinationLng] = destination;
 let currentMarker;
-localStorage.removeItem('destination');
 
 const map = L.map('map').setView([0,0],2, {touchZoom: true, doubleTapZoom: true});
 
