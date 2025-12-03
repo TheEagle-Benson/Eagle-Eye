@@ -49,7 +49,7 @@ let marker = L.marker([0,0]).addTo(map);
 L.control.layers(baseTiles).addTo(map);
 
 let user_destination = L.icon({
-    iconUrl: 'icons/marked1.png',
+    iconUrl: 'icons/destination.png',
     iconSize: [55, 55],
     iconAnchor: [27, 55],
     popupAnchor: [0, -45]
