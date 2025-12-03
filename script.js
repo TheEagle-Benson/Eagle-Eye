@@ -70,7 +70,7 @@ function successCallback(pos){
     . bindPopup(`Your Current Location`);
     map.setView([lat,lng],10);
 
-    L.Routing.control({
+    let route = L.Routing.control({
         waypoints: [
             L.latLng(lat, lng),
             L.latLng(destinationLat, destinationLng)
@@ -82,8 +82,13 @@ function successCallback(pos){
                     return L.marker(wp.latLng, {icon: user_destination}).bindPopup("Destination");
                 }
         },
-        routeWhileDragging: true
+        routeWhileDragging: true,
+        showAlternatives: true,
     }).addTo(map);
+    route.on('routesfound', (e) => {
+            console.log(e);
+        
+    });
 }
 
 
