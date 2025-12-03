@@ -57,9 +57,9 @@ let markerIcon = L.Icon.extend(
     }
 });
 
-let user_home = new markerIcon({iconUrl: 'icons/home1.png'});
-let user_current = new markerIcon({iconUrl: 'icons/marker_person2.png'});
-let user_destination = new markerIcon({iconUrl: 'icons/marked1.png', iconSize: [55, 55], iconAnchor: [27, 55], popupAnchor: [0, -45]});
+let user_home = new markerIcon({iconUrl: 'icons/home.png'});
+let user_current = new markerIcon({iconUrl: 'icons/current.png'});
+let user_destination = new markerIcon({iconUrl: 'icons/destination.png', iconSize: [55, 55], iconAnchor: [27, 55], popupAnchor: [0, -45]});
 
 function successCallback(pos){
     lat = pos.coords.latitude;
