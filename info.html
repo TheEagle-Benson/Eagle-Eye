@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="icons/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="css/output.css">
+  <title>Info | Eagle Eye</title>
+</head>
+<body>
+  <header class="flex place-items-center text-center gap-x-5 bg-cyan-500 p-4 w-full h-auto shadow-md border-b-gray-200 border-b-2">
+    <img src="/icons/logo.png" alt="logo" class="size-12 rounded-full">
+    <span class="text-[.85rem]  text-blue-800 font-bold">Eagle Eye</span>
+    <a href="index.html" class="text-white text-[1.15rem]">Home</a>
+    <a href="map.html" class="text-white text-[1.15rem]">Map</a>
+    <a href="info.html" class="text-white text-[1.15rem]">Info</a>
+    <a href="about.html" class="text-white text-[1.15rem]">About</a>
+  </header>
+  <div class="relative flex flex-col w-full h-screen bg-cyan-400 p-4 text-white">
+    <h1 class="text-3xl font-bold mb-4">Information</h1>
+    <p>Route Info</p>
+    <div id="route-info" class="mt-4">
+      <!-- Route information will be populated here -->
+    </div>
+    <p>Weather Info For Your Home</p>
+    <div id="weather-info" class="mt-4">
+      <!-- Weather information will be populated here -->
+    </div>
+    <p>Weather Info For Destination</p>
+    <div id="dest-weather-info" class="mt-4">
+      <!-- Destination weather information will be populated here -->
+    </div>
+    <div inert class="absolute flex flex-col place-self-center w-full h-screen top-0 mx-4 bg-blue-600 opacity-0 transition
+      ease-linear" id="error-view">
+      <section class="flex flex-row place-content-center w-full h-auto p-2 border-b border-b-blue-700">
+        <button class="w-[6.539rem] bg-red-600 text-white p-2 rounded-md mx-2 my-4" id="close_error_view" >Close</button>
+      </section>
+      <div class="flex flex-col place-items-center place-content-center w-full h-full text-center p-4 gap-y-4">
+        <h2 class="text-2xl font-bold text-white">Error</h2>
+        <p class="text-white" id="error-message">An unexpected error occurred.</p>
+    </div>
+  </div>
+  
+</body>
+</html>
+
+<!-- https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,wind_direction_10m&timezone=GMT -->
