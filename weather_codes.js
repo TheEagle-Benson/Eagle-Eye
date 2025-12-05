@@ -1,7 +1,6 @@
-// Weather code mapping for Open-Meteo API Includes both description and 
-//emoji
+// Weather code mapping for Open-Meteo API Includes both description and emoji
 
-weather_codes = {
+export const weather_codes = {
     0:  ["Clear sky", "☀️"],
     1:  ["Mainly clear", "🌤️"],
     2:  ["Partly cloudy", "⛅"],
@@ -30,4 +29,4 @@ weather_codes = {
     95: ["Thunderstorm", "⛈️"],
     96: ["Thunderstorm with slight hail", "⛈️🌩️"],
     99: ["Thunderstorm with heavy hail", "🌩️🌩️"]
-}
+};

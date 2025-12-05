@@ -66,6 +66,7 @@ function successCallback(pos){
     lng = pos.coords.longitude;
     accuracy = pos.coords.accuracy;
  
+    sessionStorage.setItem('home_coords', `${lat},${lng}`);
     L.marker([lat,lng], {icon: user_home}).addTo(map)
     . bindPopup(`Your Current Location`);
     map.setView([lat,lng],10);
@@ -86,8 +87,38 @@ function successCallback(pos){
         showAlternatives: true,
     }).addTo(map);
     route.on('routesfound', (e) => {
-            console.log(e);
-        
+        let routes = e.routes;
+        console.log(routes);
+        let routes_info = '';
+        if (routes.length > 1){
+            console.log('More than one route');
+            for (let i = 0; i < routes.length; i++) {
+                let route = calculateDistanceTime(routes[i]);
+                routes_info += `
+                    <h5>Main Route (Road): ${route['road_name']}</h5>
+                    <p>Distance: ${route['distance']} km</p>
+                    <p>Estimated Time: ${route["time"]} minutes</p>
+                    <p>Home Coordinate - latitiude: ${lat}, longitude: ${lng} </p>
+                    <p>Destination Coordinate - latitiude: ${destinationLat}, longitude: ${destinationLng} </p>
+                `;
+            };
+
+            sessionStorage.setItem('route-info', JSON.stringify(routes_info));
+            console.log('Saved to route information to session storage');
+            return;
+        } else {
+            let summary = routes[0].summary;
+            let distance = (summary.totalDistance / 1000).toFixed(2);
+            let time = (summary.totalTime / 60).toFixed(0);
+            let route_info_view = `
+            <h5>Main Route (Road): ${routes[0]['name']}
+            <p>Distance: ${distance} km</p>
+            <p>Estimated Time: ${time} minutes</p>
+            <p>Home Coordinate - latitiude: ${lat}, longitude: ${lng} </p>
+            <p>Destination Coordinate - latitiude: ${destinationLat}, longitude: ${destinationLng} </p>
+            `;
+            sessionStorage.setItem('route-info', JSON.stringify(route_info_view));
+        }
     });
 }
 
@@ -102,6 +133,14 @@ function successCallback2(pos){
         currentMarker = L.marker([lat, lng], {icon: user_current}).addTo(map).bindPopup("Your Current Location");
     }
  
+}
+
+function calculateDistanceTime(route){
+    let summary = route.summary;
+    let distance = (summary.totalDistance / 1000).toFixed(2);
+    let time = (summary.totalTime / 60).toFixed(0);
+    let road_name = route.name;
+    return {"distance": distance, "time": time, "road_name": road_name}
 }
 
 

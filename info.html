@@ -16,7 +16,7 @@
     <a href="info.html" class="text-white text-[1.15rem]">Info</a>
     <a href="about.html" class="text-white text-[1.15rem]">About</a>
   </header>
-  <div class="relative flex flex-col w-full h-screen bg-cyan-400 p-4 text-white">
+  <div class="relative flex flex-col w-full h-full bg-cyan-400 p-4 text-white">
     <h1 class="text-3xl font-bold mb-4">Information</h1>
     <p>Route Info</p>
     <div id="route-info" class="mt-4">
@@ -40,10 +40,8 @@
         <p class="text-white" id="error-message">An unexpected error occurred.</p>
     </div>
   </div>
-  
 
   <script type="module" src="weather.js"></script>
+  <script type="module" src="weather_codes.js"></script>
 </body>
 </html>
-
-<!-- https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,wind_direction_10m&timezone=GMT -->
