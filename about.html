@@ -4,10 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="icons/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.css"
+    integrity="sha512-NhLySQDkiKSKnT+R795uaHWRQ7D3VuIvgeOLCK8cWq4w5fq4sWF90gj8eURpTqn/f1mFzqClpOz8JPlgVTLfFw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="css/output.css">
   <title>About | Eagle Eye</title>
 </head>
-<body>
+<body class="bg-gray-200">
   <header
     class="flex place-items-center text-center gap-x-5 bg-blue-600 p-4 w-full h-auto shadow-md border-b-gray-200 border-b-2">
     <img src="/icons/logo.png" alt="logo" class="size-12 rounded-full">
@@ -17,44 +20,51 @@
     <a href="info.html" class="text-white text-[1.15rem]">Info</a>
     <a href="about.html" class="text-white text-[1.15rem]">About</a>
   </header>
-  <div class="flex flex-col place-items-center w-full bg-cyan-400 p-4 text-center gap-y-4">
-    <h1 class="text-3xl font-bold text-blue-800">About Eagle Eye</h1>
-    <p class="text-lg text-blue-700 max-w-2xl">
+  <div class="flex flex-col justify-center p-6">
+  <div class="flex flex-col w-full bg-white p-4 text-center gap-y-4 shadow-xl border border-blue-600 rounded-xl mb-4">
+    <h1 class="text-3xl font-bold text-blue-500 rounded-xl">About Eagle Eye</h1>
+    <p class="text-lg text-gray-600 max-w-2xl">
       Eagle Eye is a web application designed to help users navigate to their desired destinations with ease.
       By leveraging interactive maps and user-friendly interfaces, Eagle Eye provides accurate routing and location services.
       Whether you're planning a trip or just need directions, Eagle Eye is here to assist you every step of the way.
 
     </p>
-    <p class="text-lg text-blue-600 max-w-2xl">
+    <p class="text-lg text-gray-600 max-w-2xl">
       Developed by The Eagle, this project aims to combine technology and convenience to enhance your travel experience.
-      We are committed to continuous improvement and welcome any feedback to make Eagle Eye even better.
-      <b>Note the application is still in development. We are sorry for any inconvenience it may cause.</b>
+      We are committed to continuous improvement and welcome any feedback to make Eagle Eye even better. <br>
+      <b class="text-xl text-gray-500 font-bold">Note the application is still in development. We are sorry for any inconvenience it may cause.</b>
     </p>
   </div>
-  <div class="flex flex-col place-items-center w-full bg-cyan-400 p-4 text-center gap-y-4">
-    <h2 class="text-2xl font-bold text-blue-800">Usage</h2>
-    <p class="text-md text-blue-700 max-w-2xl">
+  <div class="flex flex-col w-full bg-white p-4 text-center gap-y-4 shadow-xl border border-blue-600 rounded-xl mb-4">
+    <h2 class="text-3xl font-bold text-blue-500">Usage</h2>
+    <p class="text-md text-gray-600 max-w-2xl">
       To use Eagle Eye, simply navigate to the Home page where you can input your destination in the provided form.
       You can either type in the address or choose a location directly on the map.
       Once you've set your destination, Eagle Eye will generate the best route for you to follow.
     </p>
-    <p class="text-md text-blue-600 max-w-2xl">
-      The recommended way to input your destination in the form is by typing the name of the place and add a comma followed by the country. For example: "Accra, Ghana".
+    <p class="text-md text-gray-600 max-w-2xl">
+      The recommended way to input your destination in the form is by typing the name of the place and add a comma followed by the country. For example: <i class="text-gray-500 font-bold">"Accra, Ghana"</i>.
     </p>
-    <p class="text-md text-blue-600 max-w-2xl">
+    <p class="text-md text-gray-600 max-w-2xl">
       Make sure to allow location access for a more personalized experience, as Eagle Eye can provide directions
       based on your current location. Enjoy seamless navigation with Eagle Eye!
     </p>
   </div>
-  <div class="flex flex-col place-items-center w-full bg-cyan-400 p-4 text-center gap-y-4">
-    <h2 class="text-2xl font-bold text-blue-800">Contact Us</h2>
-    <p class="text-md text-blue-700 max-w-2xl">
+  <div class="flex flex-col w-full bg-white p-4 text-center gap-y-4 shadow-xl rounded-xl border border-blue-600">
+    <h2 class="text-2xl font-bold text-blue-500">Contact Us</h2>
+    <p class="text-md text-gray-500 max-w-2xl">
       For inquiries, support, or feedback, please reach out to us at:
     </p>
-    <p class="text-md text-blue-600 max-w-2xl">
-      Email:  <a href="mailto:theeaglebenson@gmail.com?subject=Feedback on Eagle Eye" class="underline">send email</a>
-      Phone: <a href="tel:+233591511658" class="underline">+233591511658</a>
-    </p>
+    <span class="text-3xl text-blue-500 font-semibold">
+      <a href="mailto:theeaglebenson@gmail.com?subject=Feedback on Eagle Eye"><i
+          class="fa-regular fa-envelope"></i></a>
+      <a href="https://wa.me/+233591511658"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://www.facebook.com/theeaglebenson"><i class="fa-brands fa-facebook"></i></a>
+      <a href="https://x.com/Ben_codes5002"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/theeaglebenson/"><i class="fa-brands fa-instagram"></i></a>
+    </span>
+    <a href="http://github.com/TheEagle-Benson/Eagle-Eye" target="_blank" rel="noopener noreferrer" class="text-xl font-bold text-blue-500">Get source code <i class="fa-brands fa-github ml-1"></i></a>
+  </div>
   </div>
 </body>
 </html>
