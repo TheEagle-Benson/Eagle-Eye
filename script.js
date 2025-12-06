@@ -95,11 +95,11 @@ function successCallback(pos){
             for (let i = 0; i < routes.length; i++) {
                 let route = calculateDistanceTime(routes[i]);
                 routes_info += `
-                    <h5><span class="text-xl text-blue-400 font-bold">Main Route (Road):</span> <span class="text-lg text-gray-500 font-semibold">${route['road_name']}</span></h5>
-                    <p><span class="text-xl text-blue-400 font-bold">Distance:</span> <span class="text-lg text-gray-500 font-semibold">${route['distance']} km</span></p>
-                    <p><span class="text-xl text-blue-400 font-bold">Estimated Time:</span> <span class="text-lg text-gray-500 font-semibold">${minsHour(route["time"])}</span></p>
-                    <p><span class="text-xl text-blue-400 font-bold">Home Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitude: ${lat} - longitude: ${lng}</span></p>
-                    <p><span class="text-xl text-blue-400 font-bold">Destination Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitude ${destinationLat} - longitude: ${destinationLng}</span></p>
+                    <h5><span class="text-xl text-blue-400 font-bold">Main Route (Road):</span> <span class="text-xl text-gray-500 font-extrabold">${route['road_name']}</span></h5>
+                    <p><span class="text-xl text-blue-400 font-bold">Distance:</span> <span class="text-xl text-gray-500 font-extrabold">${route['distance']} km</span></p>
+                    <p><span class="text-xl text-blue-400 font-bold">Estimated Time:</span> <span class="text-xl text-gray-500 font-extrabold">${minsHour(route["time"])}</span></p>
+                    <p><span class="text-xl text-blue-400 font-bold">Home Coordinate:</span><span class="text-xl text-gray-500 font-extrabold"> latitude: ${lat} - longitude: ${lng}</span></p>
+                    <p><span class="text-xl text-blue-400 font-bold">Destination Coordinate:</span><span class="text-xl text-gray-500 font-extrabold"> latitude ${destinationLat} - longitude: ${destinationLng}</span></p>
                     ${insertHr(i, routes)}
                 `;
             };
@@ -112,11 +112,11 @@ function successCallback(pos){
             let distance = (summary.totalDistance / 1000).toFixed(2);
             let time = (summary.totalTime / 60).toFixed(0);
             let route_info_view = `
-            <h5><span class="text-xl text-blue-400 font-bold">Main Route (Road):</span><span class="text-lg text-gray-500 font-semibold"> ${routes[0]['name']}</span></h5>
-            <p><span class="text-xl text-blue-400 font-bold">Distance:</span> <span class="text-lg text-gray-500 font-semibold">${distance} km</span></p>
-            <p><span class="text-xl text-blue-400 font-bold">Estimated Time:</span> <span class="text-lg text-gray-500 font-semibold">${minsHour(time)}</span></p>
-            <p><span class="text-xl text-blue-400 font-bold">Home Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitiude: ${lat} - longitude: ${lng}</span> </p>
-            <p><span class="text-xl text-blue-400 font-bold">Destination Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitiude: ${destinationLat} - longitude: ${destinationLng}</span> </p>
+            <h5><span class="text-xl text-blue-400 font-bold">Main Route (Road):</span><span class="text-xl text-gray-500 font-extrabold"> ${routes[0]['name']}</span></h5>
+            <p><span class="text-xl text-blue-400 font-bold">Distance:</span> <span class="text-xl text-gray-500 font-extrabold">${distance} km</span></p>
+            <p><span class="text-xl text-blue-400 font-bold">Estimated Time:</span> <span class="text-xl text-gray-500 font-extrabold">${minsHour(time)}</span></p>
+            <p><span class="text-xl text-blue-400 font-bold">Home Coordinate:</span><span class="text-xl text-gray-500 font-extrabold"> latitiude: ${lat} - longitude: ${lng}</span> </p>
+            <p><span class="text-xl text-blue-400 font-bold">Destination Coordinate:</span><span class="text-xl text-gray-500 font-extrabold"> latitiude: ${destinationLat} - longitude: ${destinationLng}</span> </p>
             `;
             sessionStorage.setItem('route-info', JSON.stringify(route_info_view));
         }

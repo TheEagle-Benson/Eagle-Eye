@@ -3,7 +3,7 @@ let errMessage;
 let GEOLOCATION = navigator.geolocation;
 const options = {
     enableHighAccuracy: true,
-    timeout: 10000,
+    timeout: 500000,
     maximumAge: 0,
 }
 

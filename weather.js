@@ -50,15 +50,15 @@ async function displayWeather(lat, lng, view) {
     return;
   }
   view.innerHTML = `
-    <p><span class="text-xl text-blue-400 font-bold">Temperature:</span><span class="text-lg text-gray-500 font-semibold"> ${weather.current_weather.temperature_2m}${weather.current_units.temperature_2m}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Wind Speed:</span><span class="text-lg text-gray-500 font-semibold"> ${weather.current_weather.wind_speed_10m}${weather.current_units.wind_speed_10m}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Humidity:</span><span class="text-lg text-gray-500 font-semibold"> ${weather.current_weather.relative_humidity_2m}${weather.current_units.relative_humidity_2m}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Weather:</span> <span class="text-lg text-gray-500 font-semibold">${weather_codes[weather.current_weather.weather_code][1]} ${weather_codes[weather.current_weather.weather_code][0]}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Max Temperature:</span><span class="text-lg text-gray-500 font-semibold"> ${weather.daily_weather.temperature_2m_max[0]} ${weather.daily_units.temperature_2m_max}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Min Temperature:</span><span class="text-lg text-gray-500 font-semibold"> ${weather.daily_weather.temperature_2m_min[0]} ${weather.daily_units.temperature_2m_min}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">UV Index Max:</span><span class="text-lg text-gray-500 font-semibold"> ${weather.daily_weather.uv_index_max[0]}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Sunrise:</span><span class="text-lg text-gray-500 font-semibold"> ${convertISoDate(weather.daily_weather.sunrise[0])}</span></p>
-    <p><span class="text-xl text-blue-400 font-bold">Sunset:</span><span class="text-lg text-gray-500 font-semibold"> ${convertISoDate(weather.daily_weather.sunset[0])}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Temperature:</span><span class="text-xl text-gray-500 font-extrabold"> ${weather.current_weather.temperature_2m}${weather.current_units.temperature_2m}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Wind Speed:</span><span class="text-xl text-gray-500 font-extrabold"> ${weather.current_weather.wind_speed_10m}${weather.current_units.wind_speed_10m}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Humidity:</span><span class="text-xl text-gray-500 font-extrabold"> ${weather.current_weather.relative_humidity_2m}${weather.current_units.relative_humidity_2m}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Weather:</span> <span class="text-xl text-gray-500 font-extrabold">${weather_codes[weather.current_weather.weather_code][1]} ${weather_codes[weather.current_weather.weather_code][0]}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Max Temperature:</span><span class="text-xl text-gray-500 font-extrabold"> ${weather.daily_weather.temperature_2m_max[0]} ${weather.daily_units.temperature_2m_max}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Min Temperature:</span><span class="text-xl text-gray-500 font-extrabold"> ${weather.daily_weather.temperature_2m_min[0]} ${weather.daily_units.temperature_2m_min}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">UV Index Max:</span><span class="text-xl text-gray-500 font-extrabold"> ${weather.daily_weather.uv_index_max[0]}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Sunrise:</span><span class="text-xl text-gray-500 font-extrabold"> ${convertISoDate(weather.daily_weather.sunrise[0])}</span></p>
+    <p><span class="text-xl text-blue-400 font-bold">Sunset:</span><span class="text-xl text-gray-500 font-extrabold"> ${convertISoDate(weather.daily_weather.sunset[0])}</span></p>
   `;
 
 }
