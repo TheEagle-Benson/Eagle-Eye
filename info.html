@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/output.css">
   <title>Info | Eagle Eye</title>
 </head>
-<body>
+<body class="bg-gray-200">
   <header
     class="flex place-items-center text-center gap-x-5 bg-blue-600 p-4 w-full h-auto shadow-md border-b-gray-200 border-b-2">
     <img src="/icons/logo.png" alt="logo" class="size-12 rounded-full">
@@ -17,18 +17,18 @@
     <a href="info.html" class="text-white text-[1.15rem]">Info</a>
     <a href="about.html" class="text-white text-[1.15rem]">About</a>
   </header>
-  <div class="relative flex flex-col w-full h-full bg-cyan-400 p-4 text-white">
-    <h1 class="text-3xl font-bold mb-4">Information</h1>
-    <p>Route Info</p>
-    <div id="route-info" class="mt-4">
+  <div class="relative flex flex-col w-full h-full p-4 text-white">
+    <p class="text-blue-600 text-center text-2xl font-semibold">Route Info</p>
+    <div id="route-info" class="text-gray-600 bg-white p-3 border border-blue-500 my-4 rounded-xl shadow-xl">
       <!-- Route information will be populated here -->
     </div>
-    <p>Weather Info For Your Home</p>
-    <div id="weather-info" class="mt-4">
+    <p class="text-blue-600 text-center text-2xl font-semibold">Weather Information</p>
+    <p class="text-blue-600 text-center text-xl font-bold">Home</p>
+    <div id="weather-info" class="text-gray-600 bg-white p-3 border border-blue-500 my-4 rounded-xl shadow-xl">
       <!-- Weather information will be populated here -->
     </div>
-    <p>Weather Info For Destination</p>
-    <div id="dest-weather-info" class="mt-4">
+    <p class="text-blue-600 text-center text-xl font-semibold">Destination</p>
+    <div id="dest-weather-info" class="text-gray-600 bg-white p-3 border border-blue-500 my-4 rounded-xl shadow-xl">
       <!-- Destination weather information will be populated here -->
     </div>
     <div inert class="absolute flex flex-col place-self-center w-full h-screen top-0 mx-4 bg-blue-600 opacity-0 transition

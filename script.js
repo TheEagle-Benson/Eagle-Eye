@@ -95,11 +95,12 @@ function successCallback(pos){
             for (let i = 0; i < routes.length; i++) {
                 let route = calculateDistanceTime(routes[i]);
                 routes_info += `
-                    <h5>Main Route (Road): ${route['road_name']}</h5>
-                    <p>Distance: ${route['distance']} km</p>
-                    <p>Estimated Time: ${route["time"]} minutes</p>
-                    <p>Home Coordinate - latitiude: ${lat}, longitude: ${lng} </p>
-                    <p>Destination Coordinate - latitiude: ${destinationLat}, longitude: ${destinationLng} </p>
+                    <h5><span class="text-xl text-blue-400 font-bold">Main Route (Road):</span> <span class="text-lg text-gray-500 font-semibold">${route['road_name']}</span></h5>
+                    <p><span class="text-xl text-blue-400 font-bold">Distance:</span> <span class="text-lg text-gray-500 font-semibold">${route['distance']} km</span></p>
+                    <p><span class="text-xl text-blue-400 font-bold">Estimated Time:</span> <span class="text-lg text-gray-500 font-semibold">${minsHour(route["time"])}</span></p>
+                    <p><span class="text-xl text-blue-400 font-bold">Home Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitude: ${lat} - longitude: ${lng}</span></p>
+                    <p><span class="text-xl text-blue-400 font-bold">Destination Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitude ${destinationLat} - longitude: ${destinationLng}</span></p>
+                    ${insertHr(i, routes)}
                 `;
             };
 
@@ -111,11 +112,11 @@ function successCallback(pos){
             let distance = (summary.totalDistance / 1000).toFixed(2);
             let time = (summary.totalTime / 60).toFixed(0);
             let route_info_view = `
-            <h5>Main Route (Road): ${routes[0]['name']}
-            <p>Distance: ${distance} km</p>
-            <p>Estimated Time: ${time} minutes</p>
-            <p>Home Coordinate - latitiude: ${lat}, longitude: ${lng} </p>
-            <p>Destination Coordinate - latitiude: ${destinationLat}, longitude: ${destinationLng} </p>
+            <h5><span class="text-xl text-blue-400 font-bold">Main Route (Road):</span><span class="text-lg text-gray-500 font-semibold"> ${routes[0]['name']}</span></h5>
+            <p><span class="text-xl text-blue-400 font-bold">Distance:</span> <span class="text-lg text-gray-500 font-semibold">${distance} km</span></p>
+            <p><span class="text-xl text-blue-400 font-bold">Estimated Time:</span> <span class="text-lg text-gray-500 font-semibold">${minsHour(time)}</span></p>
+            <p><span class="text-xl text-blue-400 font-bold">Home Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitiude: ${lat} - longitude: ${lng}</span> </p>
+            <p><span class="text-xl text-blue-400 font-bold">Destination Coordinate:</span><span class="text-lg text-gray-500 font-semibold"> latitiude: ${destinationLat} - longitude: ${destinationLng}</span> </p>
             `;
             sessionStorage.setItem('route-info', JSON.stringify(route_info_view));
         }
@@ -142,6 +143,32 @@ function calculateDistanceTime(route){
     let road_name = route.name;
     return {"distance": distance, "time": time, "road_name": road_name}
 }
+
+function minsHour(minute){
+    if (minute > 59){
+        const hours = Math.floor(minute / 60);
+        const minutes = hours % 60;
+        let result;
+        if (hours > 1 && minutes > 1){
+            result = `${hours} hours ${minutes} minutes`;
+        } else if (hours > 1 && minutes == 1){
+            result = `${hours} hours ${minutes} minute`;
+        }
+        return result;
+    }
+    return `${minute} minutes`;
+}
+
+function insertHr(index, routes){
+    if(index !== routes.length -1) {
+        return `<div class="flex items-center my-1">
+                <hr class="grow border-gray-500">
+                <span class="text-blue-500 px-2 font-medium">Alternative Route</span>
+                <hr class="grow border-gray-500">
+                </div>`;
+    };
+    return '';
+};
 
 
 if (GEOLOCATION) {
