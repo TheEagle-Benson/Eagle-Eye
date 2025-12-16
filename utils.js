@@ -62,7 +62,7 @@ function activeStateIndicator(){
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
             if (linkHref === currentPath){
-                link.classList.add('font-bold', 'underline', 'underline-offset-4', 'text-yellow-300');
+                link.classList.add('font-bold', 'text-yellow-300');
             }
         })
     });
