@@ -13,3 +13,9 @@
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
   https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,wind_direction_10m&timezone=GMT
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.11.2/toastify.js" integrity="sha512-aieEASdA6UHnmrjaXnn7GTrPl2HmlTC924jZ1e5z0pD5vx0hGsoOYPtnnG1KjFqcvq5MGZBBL1dmgIe1TfLzNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.11.2/toastify.css" integrity="sha512-Q0bIzXh84IQ4gRE/JxmoD1s6KHZQLUZhlYjXITqII9p3Xx7bd5V7W2LlVnsaux9QI+L2u4uAmOwtPGb3tedr5Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />

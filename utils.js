@@ -28,4 +28,26 @@ function errorCallback(err){
     }
 }
 
-export {GEOLOCATION, options, errorCallback};
+function showToast(message = 'Hello World!', type = 'info'){
+    Toastify({
+                text: message,
+                duration: 4000,
+                close: true,
+                gravity: "top", 
+                position: "center",
+                stopOnFocus: true, 
+                style: {
+                            background: type === 'error' ? "#ef4444" : "#0ea5e9",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "10px",
+                            borderRadius: "10px",
+                            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+                            margin: "3.2rem 1.5rem 0 1.5rem",
+                },
+
+            }).showToast();
+
+}
+
+export {GEOLOCATION, options, errorCallback, showToast};
