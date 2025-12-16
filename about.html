@@ -15,10 +15,10 @@
     class="flex place-items-center text-center gap-x-5 bg-blue-600 p-4 w-full h-auto shadow-md border-b-gray-200 border-b-2">
     <img src="/icons/logo.png" alt="logo" class="size-12 rounded-full">
     <span class="text-[.85rem]  text-white font-bold">Eagle Eye</span>
-    <a href="index.html" class="text-white text-[1.15rem]">Home</a>
-    <a href="map.html" class="text-white text-[1.15rem]">Map</a>
-    <a href="info.html" class="text-white text-[1.15rem]">Info</a>
-    <a href="about.html" class="text-white text-[1.15rem]">About</a>
+    <a href="index.html" class="nav-link text-white text-[1.15rem]">Home</a>
+    <a href="map.html" class="nav-link text-white text-[1.15rem]">Map</a>
+    <a href="info.html" class="nav-link text-white text-[1.15rem]">Info</a>
+    <a href="about.html" class="nav-link text-white text-[1.15rem]">About</a>
   </header>
   <div class="flex flex-col justify-center p-6">
   <div class="flex flex-col w-full bg-white p-4 text-center gap-y-4 shadow-xl border border-blue-600 rounded-xl mb-4">
@@ -66,5 +66,10 @@
     <a href="http://github.com/TheEagle-Benson/Eagle-Eye" target="_blank" rel="noopener noreferrer" class="text-xl font-bold text-blue-500">Get source code <i class="fa-brands fa-github ml-1"></i></a>
   </div>
   </div>
+
+  <script type="module">
+    import { activeStateIndicator } from "./utils.js";
+    activeStateIndicator();
+  </script>
 </body>
 </html>

@@ -55,4 +55,17 @@ function showToast(message = 'Hello World!', type = 'info'){
 
 }
 
-export {GEOLOCATION, options, errorCallback, showToast};
+function activeStateIndicator(){
+    document.addEventListener('DOMContentLoaded', () => {
+        const currentPath = window.location.pathname.split('/').pop();
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (linkHref === currentPath){
+                link.classList.add('font-bold', 'underline', 'underline-offset-4', 'text-yellow-300');
+            }
+        })
+    });
+}
+
+export {GEOLOCATION, options, errorCallback, showToast, activeStateIndicator};

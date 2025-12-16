@@ -1,5 +1,5 @@
 // Eagle Eye
-import { GEOLOCATION, options, errorCallback, showToast } from "./utils.js";
+import { GEOLOCATION, options, errorCallback, showToast, activeStateIndicator } from "./utils.js";
 
 let lat;
 let lng;
@@ -7,6 +7,8 @@ let accuracy;
 let destination = sessionStorage.getItem('destination').split(',');
 let [destinationLat, destinationLng] = destination;
 let currentMarker;
+
+activeStateIndicator();
 
 const map = L.map('map').setView([0,0],2, {touchZoom: true, doubleTapZoom: true});
 

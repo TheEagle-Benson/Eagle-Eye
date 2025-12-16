@@ -1,8 +1,11 @@
 import { weather_codes } from './weather_codes.js';
+import { activeStateIndicator, showToast } from "./utils.js";
 const weather_view = document.querySelector('#weather-info');
 const dest_weather_view = document.querySelector('#dest-weather-info');
 const error_view = document.querySelector('#error-view');
 const route_info_view = document.querySelector('#route-info');
+
+activeStateIndicator();
 
 async function fetchWeather(lat, lng) {
   let open_meteo_api = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&daily=sunrise,sunset,temperature_2m_max,temperature_2m_min,uv_index_max,wind_speed_10m_max,sunshine_duration,daylight_duration&current=temperature_2m,wind_speed_10m,relative_humidity_2m,weather_code,wind_direction_10m,precipitation&timezone=GMT&forecast_days=1`;
@@ -10,6 +13,7 @@ async function fetchWeather(lat, lng) {
   try {
     let response = await fetch(open_meteo_api);
     if (!response.ok) {
+      showToast('Failed to fetch weather data!', 'error');
       throw new Error('Network response was not ok');
     }
     let data = await response.json();
@@ -43,9 +47,7 @@ function convertISoDate(isoDate) {
 async function displayWeather(lat, lng, view) {
   let weather = await fetchWeather(lat, lng);
   if (!weather){
-    error_view.removeAttribute('inert');
-    error_view.classList.remove('opacity-0');
-    error_view.classList.add('opacity-100');
+    showToast('Unable to retrieve weather data!', 'error');
     return;
   }
   view.innerHTML = `

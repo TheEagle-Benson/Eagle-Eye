@@ -1,4 +1,4 @@
-import { GEOLOCATION, options, errorCallback, showToast } from "./utils.js";
+import { GEOLOCATION, options, errorCallback, showToast, activeStateIndicator } from "./utils.js";
 
 const map_container = document.querySelector('#map_wrapper');
 const submit_btn = document.querySelector('#submit_coords');
@@ -7,6 +7,8 @@ const close_map_btn = document.querySelector('#close_map');
 const show_map_btn = document.querySelector('#dest_map');
 const destination = document.querySelector('#destination');
 let destMarker;
+
+activeStateIndicator();
 
 const map = L.map('map').setView([0,0],2);
 
