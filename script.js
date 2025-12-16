@@ -7,6 +7,7 @@ let accuracy;
 let destination = sessionStorage.getItem('destination').split(',');
 let [destinationLat, destinationLng] = destination;
 let currentMarker;
+let turfRoute = null;
 
 activeStateIndicator();
 
@@ -89,6 +90,10 @@ function successCallback(pos){
     }).addTo(map);
     route.on('routesfound', (e) => {
         let routes = e.routes;
+        let coords = routes[0].coordinates.map(coord => [coord.lng, coord.lat]);
+        turfRoute = turf.lineString(coords);
+        console.log('Turf route created');
+        console.log(turfRoute);
         console.log(routes);
         let routes_info = '';
         if (routes.length > 1){
@@ -129,10 +134,28 @@ function successCallback2(pos){
     lat = pos.coords.latitude;
     lng = pos.coords.longitude;
     accuracy = pos.coords.accuracy;
-    if (currentMarker){
+    if (!turfRoute){
+        console.log('Turf route not yet created');
+        if (currentMarker){
         currentMarker.setLatLng([lat, lng]);
     } else {
         currentMarker = L.marker([lat, lng], {icon: user_current}).addTo(map).bindPopup("Your Current Location");
+    }
+    return;
+    }
+
+    let userPoint = turf.point([lng, lat]);
+    let snapped = turf.nearestPointOnLine(turfRoute, userPoint);
+    let snappedCoords = snapped.geometry.coordinates;
+    let snappedLat = snappedCoords[1];
+    let snappedLng = snappedCoords[0];
+
+    console.log(`User Coordinates: ${lat}, ${lng}`);
+    console.log(`Snapped Coordinates: ${snappedLat}, ${snappedLng}`);
+    if (currentMarker){
+        currentMarker.setLatLng([snappedLat, snappedLng]);
+    } else {
+        currentMarker = L.marker([snappedLat, snappedLng], {icon: user_current}).addTo(map).bindPopup("Your Current Location");
     }
  
 }
