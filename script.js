@@ -1,10 +1,9 @@
 // Eagle Eye
-import { GEOLOCATION, options, errorCallback } from "./utils.js";
+import { GEOLOCATION, options, errorCallback, showToast } from "./utils.js";
 
 let lat;
 let lng;
 let accuracy;
-let errMessage = '';
 let destination = sessionStorage.getItem('destination').split(',');
 let [destinationLat, destinationLng] = destination;
 let currentMarker;
@@ -175,7 +174,8 @@ if (GEOLOCATION) {
     GEOLOCATION.getCurrentPosition(successCallback, errorCallback, options)
     GEOLOCATION.watchPosition(successCallback2, errorCallback, options)
 } else {
-    errMessage = 'Your browser does not support geolocation. Please download a browser with geolocation support.'
+    showToast('Geolocation is not supported by your browser', 'error');
+    console.log('Your browser does not support geolocation. Please download a browser with geolocation support.');
 }
 
 console.log(`Destination Coordinates: ${destinationLat}, ${destinationLng}`);

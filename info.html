@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="shortcut icon" href="icons/logo.png" type="image/x-icon">
   <link rel="stylesheet" href="css/output.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.11.2/toastify.css"
+    integrity="sha512-Q0bIzXh84IQ4gRE/JxmoD1s6KHZQLUZhlYjXITqII9p3Xx7bd5V7W2LlVnsaux9QI+L2u4uAmOwtPGb3tedr5Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>Info | Eagle Eye</title>
 </head>
 <body class="bg-gray-200">
@@ -31,15 +34,11 @@
     <div id="dest-weather-info" class="text-gray-600 bg-white p-6 border border-blue-500 my-4 rounded-xl shadow-2xl">
       <!-- Destination weather information will be populated here -->
     </div>
-    <div inert class="absolute flex flex-col place-self-center w-full h-full top-0 mx-4 bg-blue-600 opacity-0 transition
-      ease-linear" id="error-view">
-      <section class="flex flex-col text-center w-full h-auto p-2 border-b border-b-blue-700">
-        <h2 class="text-red-500 text-4xl tracking-widest">Error</h2>
-        <p class="text-xl my-3 font-bold">An error occurred at blablabla</p>
-      </section>
-  </div>
 
   <script type="module" src="weather.js"></script>
   <script type="module" src="weather_codes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.11.2/toastify.js"
+    integrity="sha512-aieEASdA6UHnmrjaXnn7GTrPl2HmlTC924jZ1e5z0pD5vx0hGsoOYPtnnG1KjFqcvq5MGZBBL1dmgIe1TfLzNw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
