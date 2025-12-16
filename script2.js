@@ -1,4 +1,4 @@
-import { GEOLOCATION, options, errorCallback } from "./utils.js";
+import { GEOLOCATION, options, errorCallback, showToast } from "./utils.js";
 
 const map_container = document.querySelector('#map_wrapper');
 const submit_btn = document.querySelector('#submit_coords');
@@ -83,6 +83,7 @@ map.on('click', function(e){
 if (GEOLOCATION){
     GEOLOCATION.getCurrentPosition(successCallback, errorCallback, options);
 } else {
+    showToast('Geolocation is not supported by your browser', 'error');
     console.log('Geolocation is not supported by your browser');
 }
 
@@ -113,6 +114,7 @@ async function geocodeLocation(location){
         let longitude = parseFloat(data.response.lng);
         result = {latitude, longitude};
     } else {
+        showToast('An unknown error occurred!', 'error');
         throw new Error("An unknown errror occurred!");
     }
    } catch (error) {
@@ -132,6 +134,7 @@ place_btn.addEventListener('click', async (e) => {
                 let lat = parseFloat(coords[0]);
                 let lng = parseFloat(coords[1]);
                 sessionStorage.setItem('destination', `${lat}, ${lng}`);
+                showToast('Destination set successfully! You will be redirected to the map page.');
                 window.location.assign('map.html');
                 return;
             } else {
@@ -139,14 +142,18 @@ place_btn.addEventListener('click', async (e) => {
                 if (coords){
                     let latlng = `${coords.latitude}, ${coords.longitude}`;
                     sessionStorage.setItem('destination', latlng);
+                    showToast('Destination set successfully! You will be redirected to the map page.');
                     window.location.assign('map.html');
+                    return;
                 } else {
+                    showToast('An error occurred while trying to get coordinates of the destination!', 'error');
                     console.log('An error occurred while trying to get coordinates of the destination!');
                     throw new Error('An error occurred while trying to get coordinates of the destination!')
                 }
             }
             
         } else {
+            showToast('Destination cannot be empty!', 'error');
             console.log('Destination is empty!')
             throw new Error('Destination is empty!')
         }
@@ -159,5 +166,6 @@ show_map_btn.addEventListener('click', showMap);
 close_map_btn.addEventListener('click', closeMap);
 submit_btn.addEventListener('click', (e) => {
     e.preventDefault();
+    showToast('Destination set successfully! You will be redirected to the map page.');
     window.location.assign('map.html');
 });
