@@ -58,9 +58,11 @@ function showToast(message = 'Hello World!', type = 'info'){
 function activeStateIndicator(){
     document.addEventListener('DOMContentLoaded', () => {
         const currentPath = window.location.pathname.split('/').pop();
+        console.log(window.location.pathname.split('/'))
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
+            console.log(linkHref, currentPath)
             if (linkHref === currentPath){
                 link.classList.add('font-bold', 'text-yellow-300');
             }
