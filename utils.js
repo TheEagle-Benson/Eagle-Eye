@@ -63,7 +63,10 @@ function activeStateIndicator(){
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
             console.log(linkHref, currentPath)
-            if (linkHref === currentPath){
+            if (currentPath === '' || currentPath === '/' && linkHref === 'index.html'){
+                link.classList.add('font-bold', 'text-yellow-300');
+            }
+            if (linkHref === currentPath+'.html'){
                 link.classList.add('font-bold', 'text-yellow-300');
             }
         })
