@@ -66,7 +66,7 @@ function activeStateIndicator(){
             if (currentPath === '' || currentPath === '/' && linkHref === 'index.html'){
                 link.classList.add('font-bold', 'text-yellow-300');
             }
-            if (linkHref === currentPath+'.html'){
+            if (linkHref === currentPath){
                 link.classList.add('font-bold', 'text-yellow-300');
             }
         })
