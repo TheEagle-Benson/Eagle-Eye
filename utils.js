@@ -63,11 +63,13 @@ function activeStateIndicator(){
         navLinks.forEach(link => {
             const linkHref = link.getAttribute('href');
             console.log(linkHref, currentPath)
-            if (currentPath === '' || currentPath === '/' && linkHref === 'index.html'){
+            if (currentPath === '' || currentPath === '/' && linkHref === 'index'){
                 link.classList.add('font-bold', 'text-yellow-300');
+                return;
             }
             if (linkHref === currentPath){
                 link.classList.add('font-bold', 'text-yellow-300');
+                return;
             }
         })
     });
